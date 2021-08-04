@@ -1,6 +1,12 @@
 import axios from "axios";
 import logo from './logo.svg';
 import HomePage from './components/home'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from "react-router-dom";
+
 
 let currColor = "white";
 const onClickHandle = (e) => {
@@ -11,15 +17,32 @@ const onClickHandle = (e) => {
 }
 
 
-  axios.get("/test").then((response) => {
+  axios.get("/").then((response) => {
    console.log(response)
   });
 
 
 function App() {
   return (
+    <Router>
+       <nav>
+          <ul>
+            <li>
+              <Link to="/home">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/music">music</Link>
+            </li>
+          </ul>
+        </nav>
+      <Route path="/home"><h1>Music Visualizer</h1></Route>
+      <Route path="/About"><h1>About</h1></Route>
+      <Route path="/music"><h1>Music</h1></Route>
+
     <div className="App" >
-      <div>Music Visualizer</div>
       <HomePage bgHue={currColor} onClick={onClickHandle} />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -36,6 +59,7 @@ function App() {
         </a>
       </header>
     </div>
+    </Router>
   );
 }
 
