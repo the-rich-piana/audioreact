@@ -2,7 +2,6 @@ import axios from "axios";
 import logo from './logo.svg';
 import HomePage from './components/home'
 import {
-  BrowserRouter as Router,
   Route,
   Link
 } from "react-router-dom";
@@ -17,14 +16,14 @@ const onClickHandle = (e) => {
 }
 
 
-  axios.get("/").then((response) => {
+  axios.get("/test").then((response) => {
    console.log(response)
   });
 
 
 function App() {
   return (
-    <Router>
+    <>
        <nav>
           <ul>
             <li>
@@ -59,7 +58,7 @@ function App() {
         </a>
       </header>
     </div>
-    </Router>
+    </>
   );
 }
 
