@@ -1,5 +1,6 @@
+import axios from "axios";
 import logo from './logo.svg';
-import HomePage from '../src/components/home'
+import HomePage from './components/home'
 
 let currColor = "white";
 const onClickHandle = (e) => {
@@ -10,9 +11,15 @@ const onClickHandle = (e) => {
 }
 
 
+  axios.get("/test").then((response) => {
+   console.log(response)
+  });
+
+
 function App() {
   return (
     <div className="App" >
+      <div>Music Visualizer</div>
       <HomePage bgHue={currColor} onClick={onClickHandle} />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
