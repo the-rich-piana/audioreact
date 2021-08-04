@@ -1,9 +1,19 @@
 import logo from './logo.svg';
-import './App.css';
+import HomePage from '../src/components/home'
+
+let currColor = "white";
+const onClickHandle = (e) => {
+  let randomColor = Math.floor(Math.random()*16777215).toString(16);
+  e.target.backgroundColor = randomColor
+  console.log(currColor)
+  currColor = randomColor
+}
+
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" >
+      <HomePage bgHue={currColor} onClick={onClickHandle} />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
