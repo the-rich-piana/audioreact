@@ -3,8 +3,12 @@ import logo from './logo.svg';
 import HomePage from './components/home'
 import {
   Route,
-  Link
+  Link, 
+  Switch
 } from "react-router-dom";
+import aboutPage from "./components/home/aboutPage";
+import musicPage from "./components/home/musicPage";
+
 
 
 let currColor = "white";
@@ -15,10 +19,18 @@ const onClickHandle = (e) => {
   currColor = randomColor
 }
 
-
-  axios.get("/test").then((response) => {
+//Axios call to backend-- listening for an express call with the same
+  axios.get("/about").then((response) => {
    console.log(response)
   });
+
+  axios.get("/test").then((response) => {
+    console.log(response)
+   });
+
+   axios.get("/music").then((response) => {
+    console.log(response)
+   });
 
 
 function App() {
@@ -33,13 +45,15 @@ function App() {
               <Link to="/about">About</Link>
             </li>
             <li>
-              <Link to="/music">music</Link>
+              <Link to="/music">Music</Link>
             </li>
           </ul>
         </nav>
-      <Route path="/home"><h1>Music Visualizer</h1></Route>
-      <Route path="/About"><h1>About</h1></Route>
-      <Route path="/music"><h1>Music</h1></Route>
+      <Switch>
+      <Route path="/home"><h1>Home</h1></Route>
+      <Route path="/About">{aboutPage}</Route>
+      <Route path="/music">{musicPage}</Route>
+      </Switch>
 
     <div className="App" >
       <HomePage bgHue={currColor} onClick={onClickHandle} />
