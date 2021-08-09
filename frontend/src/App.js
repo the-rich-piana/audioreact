@@ -1,14 +1,13 @@
 import axios from "axios";
 import React, { useRef, useState, useLayoutEffect, useMemo } from "react";
-import HomePage from './components/home';
 import "./App.scss";
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from '@react-three/drei'
 import * as THREE from 'three'
 
-
-  axios.get("/test").then((response) => {
+//Axios call to backend-- listening for an express call with the same
+  axios.get("/about").then((response) => {
    console.log(response)
   });
 

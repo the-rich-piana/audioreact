@@ -12,3 +12,14 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 app.get('/test', (req, res) => {
   res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED' }); 
 }); 
+
+app.get('/about', (req, res) => {
+  res.send({ express: 'about' }); 
+}); 
+
+app.get('/music', (req, res) => {
+  res.send({ express: 'test' }); 
+  console.log(req)
+}); 
+
+
