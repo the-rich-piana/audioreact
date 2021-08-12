@@ -1,47 +1,24 @@
-import axios from "axios";
-import React, { useRef, useState, useLayoutEffect, useMemo } from "react";
 import "./App.scss";
-import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
-import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls } from '@react-three/drei'
+import axios from "axios";
+import React, { useRef, useState, useLayoutEffect, useMemo, Suspense} from "react";
+import { useLoader, Canvas, useFrame  } from '@react-three/fiber'
+import { OrbitControls, Environment } from '@react-three/drei'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import * as THREE from 'three'
+//LOADER
+import Headphones from '../src/components/Headphones.js'
+
 
 //Axios call to backend-- listening for an express call with the same
-  axios.get("/about").then((response) => {
+axios.get("/about").then((response) => {
    console.log(response)
-  });
-
-  let size = 5000;
-  const tempObject = new THREE.Object3D()
-  const tempColor = 'red'
-  const color = new THREE.Color("rgb(255, 0, 0)");
+});
 
 
-const Boxes = (props) => {
-    // This reference will give us direct access to the mesh
-    const mesh = useRef()
-    // Set up state for the hovered and active state
-    const [hovered, setHover] = useState(false)
-    const [active, setActive] = useState(false)
-    // Rotate mesh every frame, this is outside of React without overhead
-    useFrame(() => {
-      mesh.current.rotation.x = mesh.current.rotation.y += 0.01
-    })
-    return (
-
-      <mesh
-        {...props}
-        ref={mesh}
-        scale={active ? 2 : 1}
-        onClick={(e) => setActive(!active)}
-        onPointerOver={(e) => setHover(true)}
-        onPointerOut={(e) => setHover(false)}>
-        <boxGeometry args={[1, 1, 1]} />
-        <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
-      </mesh>
-    )
-  }
-
+let size = 10000;
+const tempObject = new THREE.Object3D()
+const tempColor = 'red'
+const color = new THREE.Color("rgb(255, 0, 0)");
 
 function ArrayBoxes() {
     const ref = useRef()
@@ -66,23 +43,30 @@ function ArrayBoxes() {
         <meshLambertMaterial attach="material" vertexColors={THREE.VertexColors} />
       </instancedMesh>
     )
-  }
+}
+
+
+
   
 
 
 function App() {
-
   return (
-    
     <>
       <div>Music Visualizer</div>
       <header className="App-header">
       </header>
+
       <Canvas camera={{ position: [1, 0.5, 10], fov: 100}} className='audiocanvas'>
-        <ambientLight intensity={0.2}/>
-        <pointLight position={[-10, 10, 0]} />
-        <OrbitControls   />
-        <ArrayBoxes/>
+        <Suspense fallback={null}> 
+          <Environment preset="sunset" background/>
+
+          <ambientLight intensity={0.5}/>
+          <pointLight position={[-10, 10, 0]} />
+          <OrbitControls   />
+          <ArrayBoxes/>
+          <Headphones position={[10, 10, 0]}  />
+        </Suspense>
       </Canvas>
 
     </>
