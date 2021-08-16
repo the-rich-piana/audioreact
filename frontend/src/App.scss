@@ -12,16 +12,30 @@ body,
     padding: 0;
 }
 
+
+
 body {
     background-color: white;
     position: fixed;
 }
 div {
-
-    padding: 2px;
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    text-align: left;
     font-size: 30px;
+    
+}
+.title {
+    font-weight: 700;
+    color: rgb(54, 54, 54);
+    text-align: center;
+    z-index: 99;
+
 }
 header {
-    padding: 20px;
+    padding: 0px;
+    margin: -20px;
+    z-index: 99;
     font-size: 20px;
 }
